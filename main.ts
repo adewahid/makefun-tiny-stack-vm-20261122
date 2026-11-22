@@ -2,7 +2,7 @@ import{readFileSync,readdirSync,mkdirSync,writeFileSync}from'node:fs';
 import{join}from'node:path';
 const I=process.env.MAKEFUN_INPUT_DIR||'/input',O=process.env.MAKEFUN_OUTPUT_DIR||'/output';
 function R(P,Q){
- const N=P.length,S=new Int32Array(256),C=new Int32Array(64),M=new Int32Array(256),U=new Uint8Array(65536);
+ const N=P.length,S=new Int32Array(256),C=new Int32Array(64),M=new Int32Array(256),U=new Uint8Array(65536),D=new Int32Array(12);
  let p=0,c=0,l=0,i=0,k=0,t=0;
  const T=x=>[U.subarray(0,l),x];
  for(;;){
@@ -47,7 +47,7 @@ function R(P,Q){
    case 52:if(!c)return T(8);k=C[--c];break;
    case 64:{const a=S[p-1];if(a<0||a>255)return T(6);S[p-1]=M[a];break}
    case 65:{const a=S[p-1],v=S[p-2];if(a<0||a>255)return T(6);p-=2;M[a]=v;break}
-   case 80:{const s=String(S[p-1]);if(l+s.length>65536)return T(11);p--;for(let j=0;j<s.length;j++)U[l++]=s.charCodeAt(j);break}
+   case 80:{let v=S[p-1],n=0;const g=v<0;let a=g?-v:v;if(!a)D[n++]=48;else while(a>0){D[n++]=48+a%10;a=(a/10)|0}const z=n+(g?1:0);if(l+z>65536)return T(11);p--;if(g)U[l++]=45;for(let j=n-1;j>=0;j--)U[l++]=D[j];break}
    case 81:if(l+1>65536)return T(11);U[l++]=S[--p]&255;break;
    case 82:S[p++]=i<Q.length?Q[i++]:-1;break;
    case 83:return T(S[--p]&255);
