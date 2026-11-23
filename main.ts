@@ -30,7 +30,7 @@ function V(P,Q){
    y=S[s-1],x=S[s-2],u=x>>>0,v=y>>>0;
    if(op>18&op<23&!y)return E(4);
    s-=2;
-   S[s++]=[x+y,x-y,Math.imul(x,y),x/y,x%y,u/v,u%v,,x&y,x|y,x^y,,x<<y,x>>y,x>>>y,,x==y,x<y,u<v][op-16]|0;
+   S[s++]=((op<17?x+y:op<18?x-y:op<19?Math.imul(x,y):op<20?x/y:op<21?x%y:op<22?u/v:op<23?u%v:op<25?x&y:op<26?x|y:op<27?x^y:op<29?x<<y:op<30?x>>y:op<31?x>>>y:op<33?x==y:op<34?x<y:u<v)|0);
   }
   else if(op<49)pc=nx+z;
   else if(op<51)y=S[--s],(op<50)==!y&&(pc=nx+z);
